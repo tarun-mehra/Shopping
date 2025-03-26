@@ -9,7 +9,7 @@ export default function Footer() {
                 <div class="md:flex md:justify-between">
                     <div class="mb-6 md:mb-0">
                         <a href="https://flowbite.com/" class="flex items-center">
-                            <span class="self-center text-2xl flex gap-10 items-center font-semibold whitespace-nowrap tracking-widest text-white dark:text-white"><SiShopee /> Shopping</span>
+                            <span class="self-center text-2xl flex gap-[10px] items-center font-semibold whitespace-nowrap tracking-widest text-white dark:text-white"><SiShopee />Shopping</span>
                         </a>
                     </div>
                     <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
