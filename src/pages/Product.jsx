@@ -70,8 +70,8 @@ export default function Product() {
             .then((finalRes) => {
                 setProduct(finalRes.data)
                 window.scroll({
-                    top : 0,
-                    behavior : 'smooth'
+                    top: 0,
+                    behavior: 'smooth'
                 })
                 setLoaderStatus(false)
                 setTotalPage(finalRes.total_pages)
@@ -125,13 +125,13 @@ export default function Product() {
     return (
         <>
             <div>
-                <div className='grid grid-cols-[20%_20%] mt-[30px] items-center justify-between'>
+                <div className='grid lg:grid-cols-[20%_20%] mt-[30px] items-center justify-between'>
                     <div className='flex px-[35px] justify-between'>
-                        <p className='font-semibold text-[14px]'>FILTER</p>
-                        <p className='text-gray-500 font-semibold cursor-pointer uppercase hover:text-gray-900' onClick={clearAllFilter}>Clear All</p>
+                        <p className='font-semibold text-[14px] lg:block hidden'>FILTER</p>
+                        <p className='text-gray-500 hidden lg:block font-semibold cursor-pointer uppercase hover:text-gray-900' onClick={clearAllFilter}>Clear All</p>
                     </div>
                     <div>
-                        <select onChange={(e) => setSort(e.target.value)} name="" id="" className='bg-white border-[2px] border-black py-[5px] rounded-2xl px-[15px]'>
+                        <select onChange={(e) => setSort(e.target.value)} name="" id="" className='bg-white border-[2px] border-black py-[5px] rounded-2xl px-[15px] ml-[10px]'>
                             <option value="0">Sort by : Recommended</option>
                             <option value="1">Name : A to Z</option>
                             <option value="2">Name : Z to A</option>
@@ -141,12 +141,12 @@ export default function Product() {
                     </div>
                 </div>
                 <div>
-                    <div className='grid grid-cols-[20%_auto]'>
-                        <div className='p-[15px]'>
+                    <div className='grid lg:grid-cols-[20%_auto] p-[15px]'>
+                        <div className='p-[15px] lg:block hidden '>
                             <div className='rounded-xl h-[250px] overflow-y-scroll mb-[20px] bg-green-50'>
                                 <h1 className='text-center rounded-t-xl py-[5px] font-semibold text-[18px] sticky top-0 text-white bg-gray-500'>Categories</h1>
                                 <ul className='px-[20px] py-[10px]'>
-                                    {category.map((item, index) => <li><input className='mr-[5px]' onChange={getcheckCategory} value={item.slug} type="checkbox" />{item.name}</li>)}
+                                    {category.map((item) => <li><input className='mr-[5px]' onChange={getcheckCategory} value={item.slug} type="checkbox" />{item.name}</li>)}
                                 </ul>
                             </div>
                             <div className='shadow-5xl bg-green-50 rounded-xl h-[250px] overflow-y-scroll mb-[20px]'>
@@ -184,10 +184,10 @@ export default function Product() {
                             </div>
                         </div>
 
-                        <div className='mt-[20px] grid grid-cols-4 gap-[20px]'>
+                        <div className='mt-[20px] grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-[20px]'>
 
                             {loaderStatus ?
-                                <div className='grid grid-cols-4 gap-[300px] mt-[100px]'>
+                                <div className='grid lg:grid-cols-4 grid-cols-2 lg:gap-[300px] gap-[700px] mt-[100px]'>
                                     <Loader /><Loader /><Loader /><Loader /><Loader /><Loader /><Loader /><Loader /><Loader /><Loader /><Loader /><Loader /><Loader /><Loader /><Loader /><Loader />
                                 </div>
                                 :
@@ -197,11 +197,11 @@ export default function Product() {
                     </div>
                 </div>
                 <div className='py-[20px] mt-[30px] w-[100%] bg-gray-500'>
-                <ResponsivePagination
-                    current={currentPage}
-                    total={totalPage}
-                    onPageChange={setCurrentPage}
-                />
+                    <ResponsivePagination
+                        current={currentPage}
+                        total={totalPage}
+                        onPageChange={setCurrentPage}
+                    />
                 </div>
             </div>
         </>
@@ -212,11 +212,11 @@ export default function Product() {
 function ProductDetails({ ProductData }) {
     let { image, name, price, description } = ProductData
     return (
-        <div className='shadow-lg rounded-[10px] cursor-pointer h-auto'>
+        <div className='shadow-lg rounded-[10px] cursor-pointer h-[480px]'>
             <img src={image} className='rounded-t-xl h-[55%] w-[100%]' alt="" />
             <div className='p-[15px]'>
                 <h1 className='text-[18px] font-semibold'>{name}</h1>
-                <p className='text-[14px]'>{description}</p>
+                <p className='text-[14px] lg:leading-6 md:leading-8 leading-6'>{description}</p>
                 <p className='text-red-800 font-semibold'>price {Number({ price }) <= 9 ? price + ".00" : price}</p>
             </div>
         </div>
