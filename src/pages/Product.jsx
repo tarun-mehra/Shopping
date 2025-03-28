@@ -1,12 +1,17 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import 'react-responsive-pagination/themes/classic.css';
 import ResponsivePagination from 'react-responsive-pagination';
+import { myContext } from './MainContext';
+import { FaIndianRupeeSign } from "react-icons/fa6";
+
 
 
 export default function Product() {
 
     let [category, setCategory] = useState([])
+
+    let {count,setCount,cart,setCart} = useContext(myContext)
 
     let getCategory = () => {
         axios.get('https://wscubetech.co/ecommerce-api/categories.php')
@@ -25,6 +30,8 @@ export default function Product() {
                 setBrand(finalRes.data)
             })
     }
+
+
 
     let [product, setProduct] = useState([])
 
@@ -209,15 +216,33 @@ export default function Product() {
 }
 
 
+
+
 function ProductDetails({ ProductData }) {
-    let { image, name, price, description } = ProductData
+    let {cart,setCart} = useContext(myContext)
+
+    let { image, name, price, description,id} = ProductData
+
+    let addToCart = () => {
+        let cartObj = {
+            image,
+            name,
+            price,
+            quantity: 1,
+            id
+        }
+
+        setCart([...cart,cartObj])
+    }
+
     return (
-        <div className='shadow-lg rounded-[10px] cursor-pointer h-[480px]'>
-            <img src={image} className='rounded-t-xl h-[55%] w-[100%]' alt="" />
+        <div className='shadow-lg relative rounded-[10px] cursor-pointer h-[530px]'>
+            <img src={image} className='rounded-t-xl h-[250px] w-[100%]' alt="" />
             <div className='p-[15px]'>
-                <h1 className='text-[18px] font-semibold'>{name}</h1>
-                <p className='text-[14px] lg:leading-6 md:leading-8 leading-6'>{description}</p>
-                <p className='text-red-800 font-semibold'>price {Number({ price }) <= 9 ? price + ".00" : price}</p>
+                <h1 className='text-[18px] h-[50px] font-semibold'>{name}</h1>
+                <p className='text-[14px] mt-[10px] lg:leading-5 md:leading-8 leading-6 h-[100px]'>{description}</p>
+                <p className='text-gray-800 flex items-center mt-[15px] h-[20px] font-semibold'><FaIndianRupeeSign/> {Number({ price }) <= 9 ? price + ".00" : price}</p>
+                <button onClick={addToCart} className='bg-gray-500 hover:bg-gray-800 cursor-pointer p-[5px] rounded-xl px-[15px] top-[90%] absolute text-white'>Add to Cart</button>
             </div>
         </div>
     )

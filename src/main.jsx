@@ -9,35 +9,36 @@ import Register from './pages/Register.jsx'
 import SignUp from './pages/SignUp.jsx'
 import Product from './pages/Product.jsx'
 import Login from './pages/Login.jsx'
+import MainContext from './pages/MainContext.jsx'
 
-let myrouter = createBrowserRouter ([
+let myrouter = createBrowserRouter([
   {
-    path : '/',
-    element : <Layout/>,
-    children : [
+    path: '/',
+    element: <Layout />,
+    children: [
       {
-        path : '/',
-        element : <Home/>
+        path: '/',
+        element: <Home />
       },
       {
-        path : '/product',
-        element : <Product/>
+        path: '/product',
+        element: <Product />
       },
       {
-        path : '/cart',
-        element : <Cart/>
+        path: '/cart',
+        element: <Cart />
       },
       {
-        path : '/register',
-        element : <Register/>
+        path: '/register',
+        element: <Register />
       },
       {
-        path : '/sign-up',
-        element : <SignUp/>
+        path: '/sign-up',
+        element: <SignUp />
       },
       {
-        path : '/login',
-        element : <Login/>
+        path: '/login',
+        element: <Login />
       }
     ]
   }
@@ -46,6 +47,8 @@ let myrouter = createBrowserRouter ([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={myrouter} />
+    <MainContext>
+      <RouterProvider router={myrouter} />
+    </MainContext>
   </StrictMode>,
 )

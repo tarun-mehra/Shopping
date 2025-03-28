@@ -1,13 +1,18 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { SiShopee } from "react-icons/si";
+import { myContext } from '../pages/MainContext';
+import { PiShoppingCartDuotone } from "react-icons/pi";
+
 
 
 export default function Header() {
 
+    let {cart,setCart} = useContext(myContext)
+ 
     let [menuOpen,setOpenMenu] = useState(false)
     return (
-        <header className='sticky z-40 top-0 bg-gray-700 shadow-lg lg:py-[10px] py-[5px]'>
+        <header className='sticky z-40 top-0 bg-gray-700 shadow-lg lg:py-[0px] py-[5px]'>
 
 
             <nav className="bg-gray-700 dark:bg-gray-900">
@@ -30,7 +35,7 @@ export default function Header() {
                                 <Link to={'product'} onClick={()=>setOpenMenu(false)} className="block py-2 px-3 text-gray-300 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-white hover:text-white font-semibold dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Product</Link>
                             </li>
                             <li>
-                                <Link to={'cart'} onClick={()=>setOpenMenu(false)} className="block py-2 px-3 hover:text-white font-semibold text-gray-300 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0  md:p-0 dark:text-white  dark:hover:bg-gray-700  md:dark:hover:bg-transparent">Cart</Link>
+                                <Link to={'cart'} onClick={()=>setOpenMenu(false)} className="flex items-center gap-[5px] py-2 px-3 hover:text-white font-semibold text-gray-300 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0  md:p-0 dark:text-white  dark:hover:bg-gray-700 md:dark:hover:bg-transparent relative">Cart <PiShoppingCartDuotone className='text-2xl'/><span className='hidden lg:block absolute right-[-1px] top-[-6px] bg-yellow-300 px-[4px] py-[0px] rounded-[50%] text-gray-900 text-[10px]'>{cart.length}</span></Link>
                             </li>
                             <li>
                                 <Link to={'/register'} onClick={()=>setOpenMenu(false)} className="block py-2 px-3 hover:text-white font-semibold text-gray-300 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0  md:p-0   md:dark:hover:bg-transparent">Register</Link>
